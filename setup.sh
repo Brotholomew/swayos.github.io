@@ -103,7 +103,8 @@ sudo pacman -S --noconfirm --needed \
      gumbo-parser \
      mujs \
      curl \
-     wget
+     wget \
+     ncdu
 
 
 log "install oh-my-zsh"

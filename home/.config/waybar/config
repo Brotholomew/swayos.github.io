@@ -17,17 +17,11 @@
     ],
 
     "modules-right": [
-    "custom/apps",
-    "custom/terminal",
     "custom/filemanager",
-    "custom/browser",
-    "custom/libre",
-    "custom/mmfm",
-    "custom/vmp",
     "custom/printer",
-    "custom/software",
     "custom/overview",
     "custom/settings",
+    "custom/displays",
     "clock"
     ],
     
@@ -92,15 +86,10 @@
         "interval": "once",
         "on-click": "swaymsg exec 'nautilus --new-window'",
     },
-    "custom/libre": {
-        "format": "<span font_family='Font Awesome 6' size='xx-large'></span> ",
-        "interval": "once",
-        "on-click": "swaymsg exec libreoffice",
-    },
     "custom/terminal": {
         "format": "<span font_family='Font Awesome 6' size='xx-large'></span> ",
         "interval": "once",
-        "on-click": "swaymsg exec foot",
+        "on-click": "swaymsg exec kitty",
     },
     "custom/browser": {
         "format": "<span font_family='Font Awesome 6' size='x-large'></span> ",
