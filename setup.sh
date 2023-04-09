@@ -4,6 +4,8 @@
 # A user with sudo permissions and a live network connection is needed
 #
 
+REPO_DIR=$PWD
+
 # Set up logging
 exec 1> >(tee "swayos_setup_out")
 exec 2> >(tee "swayos_setup_err")
@@ -52,16 +54,14 @@ sudo pacman -S --noconfirm --needed \
      waybar \
      wofi \
      brightnessctl \
-     foot \
+     kitty \
      nautilus \
-     libreoffice-fresh \
      gnome-system-monitor \
      system-config-printer \
      cups \
      polkit-gnome \
      wl-clipboard \
      pavucontrol \
-     emacs \
      adapta-gtk-theme
 
 log "Installing aur dependencies"
@@ -85,7 +85,6 @@ sudo pacman -S --noconfirm --needed \
      appstream-glib \
      qrencode \
      libxss \
-     git \
      perl-error \
      perl-mailtools \
      perl-timedate \
@@ -102,16 +101,16 @@ sudo pacman -S --noconfirm --needed \
      openjpeg2 \
      libmupdf \
      gumbo-parser \
-     mujs
-
-log "Cloning swayOS repo"
-git clone https://github.com/swayos/swayos.github.io.git
-cd swayos.github.io
+     mujs \
+     curl \
+     wget
 
 
-log "Copying terminus-ttf fonts to font directory"
-sudo cp -f font/*.* /usr/share/fonts/
-check "$?" "cp"
+log "install oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cd ~/.oh-my-zsh/themes
+git clone https://github.com/eendroroy/alien.git
+cd $REPO_DIR
 
 
 log "Copying settings to home folder"
@@ -119,13 +118,7 @@ cp -f -R home/. ~/
 check "$?" "cp"
 
 
-log "Starting services"
-sudo systemctl enable iwd --now
-sudo systemctl enable bluetooth --now
-sudo systemctl enable cups --now
-
-
-items=(sov mmfm vmp wcp wob wlogout wdisplays iwgtk libpamac-aur pamac-aur google-chrome)
+items=(yay-git ly ttf-iosevka terminus-font-ttf sov mmfm vmp wcp wob wlogout wdisplays iwgtk libpamac-aur pamac-aur google-chrome vscodium)
 
 log "Installing aur packages"
 for i in "${items[@]}"
@@ -141,14 +134,16 @@ do
     cd ..
 done
 
+
+log "Starting services"
+sudo systemctl enable iwd --now
+sudo systemctl enable bluetooth --now
+sudo systemctl enable cups --now
+sudo systemctl enable ly
+
+
 log "Linking software store"
 sudo ln /usr/bin/pamac-manager /usr/bin/appstore
-
-
-log "Cleaning up"
-cd ..
-rm -f -R swayos.github.io
-check "$?" "rm"
 
 
 log "Changing shell to zsh"

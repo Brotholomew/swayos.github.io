@@ -8,7 +8,7 @@ input * {
       repeat_rate 100
       repeat_delay 250
       # uncomment below to add other input sources
-      xkb_layout "us,hu"
+      xkb_layout "pl,de"
       xkb_variant ",101_qwerty_dot_nodead"
       xkb_options "grp:alt_space_toggle"
 }
@@ -17,9 +17,9 @@ input * {
 
 set $menu wofi --show run | xargs swaymsg exec --
 set $browser google-chrome-stable --ozone-platform-hint=auto
-set $terminal foot
-set $screenshot grim ~/Downloads/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
-set $screenclip slurp | grim -g - ~/Downloads/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $terminal kitty
+set $screenshot grim ~/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $screenclip slurp | grim -g - ~/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 
 # shortcuts
 
@@ -127,7 +127,7 @@ bindsym $mod+XF86AudioNext exec "echo 2 > /tmp/vmp"
 bindsym $mod+XF86AudioPrev exec "echo 3 > /tmp/vmp"
 
 bindsym --no-repeat $mod+Print exec $screenshot
-bindsym --no-repeat $mod+Shift+Print exec $screenclip
+bindsym --no-repeat $mod+Shift+s exec $screenclip
 bindsym --no-repeat $mod+p exec "echo 2 > /tmp/wcp"
 
 floating_modifier $mod normal
@@ -143,7 +143,7 @@ client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
 client.placeholder      #000000 #0c0c0c #ffffff #000000 
 client.background       #2B2C2B
 
-output * bg ~/.config/sway/sunset_help.jpg stretch
+output * bg ~/.config/sway/got-wallpaper.jpg stretch
 
 default_border none
 default_floating_border normal
